@@ -57,39 +57,39 @@ module CONTROL(
 
     always @(OPCODE or FUNCT) begin
 
-        addi <= (OPCODE == 6'h8) ? 1 : 0;
-        addiu <= (OPCODE == 6'h9) ? 1 : 0;
-        andi <= (OPCODE == 6'hc) ? 1 : 0;
-        ori <= (OPCODE == 6'hd) ? 1 : 0; 
-        lw <= (OPCODE == 6'h23) ? 1 : 0;
-        sw <= (OPCODE == 6'h2b) ? 1 : 0;
-        beq <= (OPCODE == 6'h4) ? 1 : 0;
-        bne <= (OPCODE == 6'h5) ? 1 : 0; 
-        slti <= (OPCODE == 6'ha) ? 1 : 0;
-        j <= (OPCODE == 6'h2) ? 1 : 0;
-        jal <= (OPCODE == 6'h3) ? 1 : 0;
-        xori <= (OPCODE == 6'he) ? 1 : 0; 
-        lh <= (OPCODE == 6'h21) ? 1 : 0;
-        bgez <= (OPCODE == 6'h1) ? 1 : 0;
+        addi = (OPCODE == 6'h8) ? 1 : 0;
+        addiu = (OPCODE == 6'h9) ? 1 : 0;
+        andi = (OPCODE == 6'hc) ? 1 : 0;
+        ori = (OPCODE == 6'hd) ? 1 : 0; 
+        lw = (OPCODE == 6'h23) ? 1 : 0;
+        sw = (OPCODE == 6'h2b) ? 1 : 0;
+        beq = (OPCODE == 6'h4) ? 1 : 0;
+        bne = (OPCODE == 6'h5) ? 1 : 0; 
+        slti = (OPCODE == 6'ha) ? 1 : 0;
+        j = (OPCODE == 6'h2) ? 1 : 0;
+        jal = (OPCODE == 6'h3) ? 1 : 0;
+        xori = (OPCODE == 6'he) ? 1 : 0; 
+        lh = (OPCODE == 6'h21) ? 1 : 0;
+        bgez = (OPCODE == 6'h1) ? 1 : 0;
 
         if (OPCODE != 0)begin
-            add <= 0; addu <= 0; _and <= 0; sll <= 0; sra <= 0; srl <= 0; sub <= 0; _or <= 0; _nor <= 0; slt <= 0; sltu <= 0; jr <= 0; syscall <= 0; subu <= 0;
+            add = 0; addu = 0; _and = 0; sll = 0; sra = 0; srl = 0; sub = 0; _or = 0; _nor = 0; slt = 0; sltu = 0; jr = 0; syscall = 0; subu = 0;
         end
         else begin
-            add <= (FUNCT == 6'h20) ? 1 : 0;
-            addu <= (FUNCT == 6'h21) ? 1 : 0;
-            _and <= (FUNCT == 6'h24) ? 1 : 0;
-            sll <= (FUNCT == 6'h0) ? 1 : 0; 
-            sra <= (FUNCT == 6'h3) ? 1 : 0;
-            srl <= (FUNCT == 6'h2) ? 1 : 0;
-            sub <= (FUNCT == 6'h22) ? 1 : 0;
-            _or <= (FUNCT == 6'h25) ? 1 : 0; 
-            _nor <= (FUNCT == 6'h27) ? 1 : 0;
-            slt <= (FUNCT == 6'h2a) ? 1 : 0;
-            sltu <= (FUNCT == 6'h2b) ? 1 : 0;
-            jr <= (FUNCT == 6'h8) ? 1 : 0; 
-            syscall <= (FUNCT == 6'hc) ? 1 : 0;
-            subu <= (FUNCT == 6'h23) ? 1 : 0;
+            add = (FUNCT == 6'h20) ? 1 : 0;
+            addu = (FUNCT == 6'h21) ? 1 : 0;
+            _and = (FUNCT == 6'h24) ? 1 : 0;
+            sll = (FUNCT == 6'h0) ? 1 : 0; 
+            sra = (FUNCT == 6'h3) ? 1 : 0;
+            srl = (FUNCT == 6'h2) ? 1 : 0;
+            sub = (FUNCT == 6'h22) ? 1 : 0;
+            _or = (FUNCT == 6'h25) ? 1 : 0; 
+            _nor = (FUNCT == 6'h27) ? 1 : 0;
+            slt = (FUNCT == 6'h2a) ? 1 : 0;
+            sltu = (FUNCT == 6'h2b) ? 1 : 0;
+            jr = (FUNCT == 6'h8) ? 1 : 0; 
+            syscall = (FUNCT == 6'hc) ? 1 : 0;
+            subu = (FUNCT == 6'h23) ? 1 : 0;
         end
 
         // ALU Option
@@ -106,21 +106,21 @@ module CONTROL(
                 sll ? 0 : 0;
 
         // Control Message
-        MemRead <= (lw || lh) ? 1 : 0;
-        MemWrite <= sw;
-        Shift <= (sll || sra || srl) ? 1 : 0;
-        Zero_extend <= (xori || andi || ori) ? 1 : 0;
-        RegDst <= (add || _nor || addu || _and || sll || sra || srl || _or || slt || sltu || subu || sub) ? 1 : 0;
-        Jump <= (j || jal);
-        Beq <= beq;
-        Bne <= bne;
-        Jal <= jal;
-        Jr <= jr;
-        Syscall <= syscall;
-        Bgez <= bgez;
-        Lh <= lh;
-        ALUSrc <= (addi || addiu || andi || sll || sra || srl || ori || lw || sw || slti || xori || lh) ? 1 : 0;
-        RegWrite <= (slt || add || addiu || addu || _and || sll || sra || _nor || srl || _or || lh || sltu || subu || sub || addi || andi || ori || lw || slti || xori || jal) ? 1 : 0; 
+        MemRead = (lw || lh) ? 1 : 0;
+        MemWrite = sw;
+        Shift = (sll || sra || srl) ? 1 : 0;
+        Zero_extend = (xori || andi || ori) ? 1 : 0;
+        RegDst = (add || _nor || addu || _and || sll || sra || srl || _or || slt || sltu || subu || sub) ? 1 : 0;
+        Jump = (j || jal);
+        Beq = beq;
+        Bne = bne;
+        Jal = jal;
+        Jr = jr;
+        Syscall = syscall;
+        Bgez = bgez;
+        Lh = lh;
+        ALUSrc = (addi || addiu || andi || sll || sra || srl || ori || lw || sw || slti || xori || lh) ? 1 : 0;
+        RegWrite = (slt || add || addiu || addu || _and || sll || sra || _nor || srl || _or || lh || sltu || subu || sub || addi || andi || ori || lw || slti || xori || jal) ? 1 : 0; 
     end 
 
 endmodule
